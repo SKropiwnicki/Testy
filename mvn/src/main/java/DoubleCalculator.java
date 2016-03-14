@@ -30,7 +30,7 @@ public class DoubleCalculator {
 
     public DoubleCalculator()
     {
-        System.out.println( " Konstruktor Calc: " + this);
+        //System.out.println( " Konstruktor Calc: " + this);
     }
 
 
