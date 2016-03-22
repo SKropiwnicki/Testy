@@ -7,8 +7,10 @@ import static org.junit.Assert.*;
 
 
 public class WeaponManagerTest {
-
-
+/*
+    //SUT
+    private IWeaponManager weaponMng;
+    private IMyList mock;
     Weapon w1;
     Weapon w2;
     Weapon w3;
@@ -18,6 +20,7 @@ public class WeaponManagerTest {
          w1 = new Weapon("Sword", 10, 20);
          w2 = new Weapon("Axe", 11, 20);
          w3 = new Weapon("Bow", 1, 201);
+        weaponMng =  new WeaponManager();
     }
 
     @After
@@ -27,7 +30,7 @@ public class WeaponManagerTest {
 
     @Test
     public void testAdd() throws Exception {
-        IWeaponManager weaponMng =  new WeaponManager();
+
 
         weaponMng.add(w1);
         ArrayList<Weapon> weapons = weaponMng.getAll();
@@ -44,7 +47,7 @@ public class WeaponManagerTest {
 
     @Test
     public void testGetAll() throws Exception {
-        IWeaponManager weaponMng =  new WeaponManager();
+
 
         weaponMng.add(w1);
         ArrayList<Weapon> weapons = weaponMng.getAll();
@@ -65,5 +68,5 @@ public class WeaponManagerTest {
         assertEquals(weapons.get(2).damage, 1);
         assertEquals(weapons.get(2).value, 201);
     }
-
+*/
 }
