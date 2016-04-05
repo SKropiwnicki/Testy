@@ -61,3 +61,7 @@ fabric.properties
 .dupa.swp
 Sprawdziany/wej01/target/
 lab01 i lab02/target/surefire-reports/DoubleCalculatorTest.txt
+*.DS_Store
+lab04/messengerMock/.settings/
+lab04/messengerMock/.project
+lab04/messengerMock/target/
