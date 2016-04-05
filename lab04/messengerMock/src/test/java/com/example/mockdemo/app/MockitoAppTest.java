@@ -80,22 +80,15 @@ public class MockitoAppTest {
 		verify(msMock).send(VALID_SERVER, INVALID_MESSAGE);
 	}
 
-/*	// Przechwytywanie parametrow
 	@Test
 	public void sendingConnectionStatus() {
 
 		ArgumentCaptor<String> capturedServer = ArgumentCaptor.forClass(String.class);
-		//Capture<String> capturedServer = EasyMock.newCapture();
-
-		verify(msMock).checkConnection(capturedServer.capture());
-
-
-
 
 		assertEquals(1, messenger.testConnection(INVALID_SERVER));
 		assertEquals(INVALID_SERVER, capturedServer.getValue());
 
-		verify(msMock);
+		verify(msMock).checkConnection(capturedServer.capture());
 	}
-	*/
+
 }
