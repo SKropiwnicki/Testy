@@ -1,4 +1,4 @@
-package com.example.mockdemo.app;
+package com.example.jbehavedemo;
 
 import com.example.mockdemo.messenger.MalformedRecipientException;
 import com.example.mockdemo.messenger.MessageService;
