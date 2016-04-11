@@ -65,3 +65,7 @@ lab01 i lab02/target/surefire-reports/DoubleCalculatorTest.txt
 lab04/messengerMock/.settings/
 lab04/messengerMock/.project
 lab04/messengerMock/target/
+lab05/JBehavePrzyklad/target/
+lab05/JBehavePrzyklad/.project
+lab05/JBehaveMessenger/.project
+lab05/JBehaveMessenger/target/
