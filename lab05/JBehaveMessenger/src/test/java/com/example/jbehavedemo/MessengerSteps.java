@@ -62,8 +62,10 @@ public class MessengerSteps {
         assertThat(msg.sendMessage(VALID_SERVER, testMsg), either(equalTo(r1)).or(equalTo(r2)));
     }
 
-//    @Then("subtracting should return $result")
-//    public void shouldSubstract(int result){
-//        assertEquals(result, msg.subtract());
-//    }
+    @Then("sendMessage should return $r")
+    public void checkSendMessageResult(int r){
+        assertEquals(r , msg.sendMessage(VALID_SERVER, testMsg));
+    }
+
+
 }
