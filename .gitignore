@@ -69,3 +69,6 @@ lab05/JBehavePrzyklad/target/
 lab05/JBehavePrzyklad/.project
 lab05/JBehaveMessenger/.project
 lab05/JBehaveMessenger/target/
+lab06/Selenium/target/
+lab07/jBehaveSelenium/target/
+*.prefs
