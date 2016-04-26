@@ -37,8 +37,8 @@ public class TelemanWebTest extends JUnitStories {
 
     public TelemanWebTest() {
         //TODO: TUTAJ JEST WEB DRIVER TRZEBA GO ZMIENIAC
-    	System.setProperty("webdriver.chrome.driver", "/Users/kuba/Dev/chromedriver/chromedriver");
-        //System.setProperty("webdriver.chrome.driver", "C:\\chromeDriver\\chromedriver.exe");
+    	//System.setProperty("webdriver.chrome.driver", "/Users/kuba/Dev/chromedriver/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "C:\\chromeDriver\\chromedriver.exe");
 
 	}
 
