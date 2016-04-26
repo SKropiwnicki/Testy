@@ -18,9 +18,30 @@ public class TestPageSteps {
         this.pages = pages;
     }
 
+
     @Given("user is on Home page")
     public void userIsOnHomePage(){
         pages.home().open();
+    }
+
+    @When("user click twoDigits Submit without any input")
+    public void userClickEmptySubmit() {
+        pages.home().clickSubmitForDigits();
+    }
+    @Then("this field is required is shown")
+    public void fieldRequiredCheck() {
+       assertTrue(pages.home().findThisFieldRequired());
+    }
+
+    @When("user click twoDigits Submit with 2 digits input")
+    public void userClickSubmitWithInput() {
+        pages.home().inputTwoDigits();
+        pages.home().clickSubmitForDigits();
+    }
+
+    @Then("form submitted message is shown")
+    public void formSubmited() {
+        assertTrue(pages.home().isFormSubmitedMessage());
     }
 
     @When("user click setup first project link")
@@ -30,7 +51,7 @@ public class TestPageSteps {
 
     @Then("proper page is shown")
     public void somePageIsShown(){
-        assertEquals("Selenium Framework | Practiceform", pages.setupProjectLink().getTitle());
+        assertEquals("Selenium Framework | Setup First Project", pages.setupProjectLink().getTitle());
         assertNotNull(true);
     }
 
