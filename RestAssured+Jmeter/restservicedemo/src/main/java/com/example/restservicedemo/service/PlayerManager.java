@@ -35,6 +35,8 @@ public class PlayerManager {
 	private PreparedStatement getWeaponWithOwnerStmt;
 	private PreparedStatement getAllWeaponsStmt;
 	private PreparedStatement deleteAllWeaponsStmt;
+	private PreparedStatement resetPlayerIncrementationStmt;
+	private PreparedStatement resetWeaponIncrementationStmt;
 
 	private Statement statement;
 
@@ -95,6 +97,11 @@ public class PlayerManager {
 			getAllPlayersWithWeaponsStmt = connection
 					.prepareStatement("SELECT p_id, nickname, level, profession, w_id, name, description, damage, owner_id FROM Player JOIN Weapon ON owner_id = p_id");
 
+			resetPlayerIncrementationStmt = connection
+					.prepareStatement("ALTER TABLE Player ALTER COLUMN p_id RESTART WITH 1");
+			resetWeaponIncrementationStmt = connection
+					.prepareStatement("ALTER TABLE Weapon ALTER COLUMN w_id RESTART WITH 1");
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -107,6 +114,7 @@ public class PlayerManager {
 	public void clearPlayers() {
 		try {
 			deleteAllPlayersStmt.executeUpdate();
+			resetPlayerIncrementationStmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -115,6 +123,7 @@ public class PlayerManager {
 	public void clearWeapons() {
 		try {
 			deleteAllWeaponsStmt.executeUpdate();
+			resetWeaponIncrementationStmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

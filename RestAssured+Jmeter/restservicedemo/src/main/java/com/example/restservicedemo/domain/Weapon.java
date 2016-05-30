@@ -52,5 +52,29 @@ public class Weapon {
 	public Player getOwner() {return owner;}
 
 	public void setOwner(Player owner) {this.owner = owner;}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Weapon)) return false;
+
+		Weapon weapon = (Weapon) o;
+
+		if (id != weapon.id) return false;
+		if (damage != weapon.damage) return false;
+		if (name != null ? !name.equals(weapon.name) : weapon.name != null) return false;
+		if (description != null ? !description.equals(weapon.description) : weapon.description != null) return false;
+		return owner != null ? owner.equals(weapon.owner) : weapon.owner == null;
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (name != null ? name.hashCode() : 0);
+		result = 31 * result + (description != null ? description.hashCode() : 0);
+		result = 31 * result + damage;
+		result = 31 * result + (owner != null ? owner.hashCode() : 0);
+		return result;
+	}
 }
