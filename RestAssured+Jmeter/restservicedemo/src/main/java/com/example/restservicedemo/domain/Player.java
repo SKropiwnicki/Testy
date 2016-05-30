@@ -9,20 +9,21 @@ public class Player {
 	
 	private String nickname;
 	private int level;
-	private Professions profession;
 	private String professionStr;
-	private long weaponId;
 	
 	public Player() {
 	}
 
-	public Player(long id, String nickname, int level, Professions profession , long weaponId ) {
-		this.id = id;
+	public Player( String nickname, int level, String professionStr , long weaponId ) {
 		this.nickname = nickname;
 		this.level = level;
-		this.profession = profession;
-		this.professionStr = profession.toString();
-		this.weaponId = weaponId;
+		this.professionStr = professionStr;
+	}
+
+	public boolean hasId()
+	{
+		if (id!=0) return true;
+		else return false;
 	}
 
 	public String getNickname() {return nickname;}
@@ -32,35 +33,6 @@ public class Player {
 	public int getLevel() {return level;}
 
 	public void setLevel(int level) {this.level = level;}
-
-//public enum Professions {WARRIOR, MAGE, ROGUE, CLERIC, ERROR}
-	public Professions getProfession() {return profession;}
-
-	public void setProfession(String profession) {
-		Professions actualProfession = Professions.ERROR;
-		switch (profession) {
-			case "WARRIOR":
-				actualProfession = Professions.WARRIOR;
-				break;
-			case "MAGE":
-				actualProfession = Professions.MAGE;
-				break;
-			case "ROGUE":
-				actualProfession = Professions.ROGUE;
-				break;
-			case "CLERIC":
-				actualProfession = Professions.CLERIC;
-				break;
-			default:
-				actualProfession = Professions.ERROR;
-		}
-
-		this.profession = actualProfession;
-	}
-
-	public long getWeaponId() {return weaponId;}
-
-	public void setWeaponId(long weaponId) {this.weaponId = weaponId;}
 
 	public long getId() {
 		return id;
@@ -73,4 +45,27 @@ public class Player {
 	public String getProfessionStr() {return professionStr;}
 
 	public void setProfessionStr(String professionStr) {this.professionStr = professionStr;}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Player player = (Player) o;
+
+		if (id != player.id) return false;
+		if (level != player.level) return false;
+		if (nickname != null ? !nickname.equals(player.nickname) : player.nickname != null) return false;
+		return professionStr != null ? professionStr.equals(player.professionStr) : player.professionStr == null;
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
+		result = 31 * result + level;
+		result = 31 * result + (professionStr != null ? professionStr.hashCode() : 0);
+		return result;
+	}
 }

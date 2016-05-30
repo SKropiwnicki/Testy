@@ -6,19 +6,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Weapon {
 	
 	private long id;
-	private String make;
-	private String model;	
-	private int yop;
+
+	private String name;
+	private String description;
+	private int damage;
+
+	private Player owner;
 	
-	public Weapon(long id, String make, String model, int yop) {
+	public Weapon( String make, String model, int yop) {
 		super();
-		this.id = id;
-		this.make = make;
-		this.model = model;
-		this.yop = yop;
+		this.name = make;
+		this.description = model;
+		this.damage = yop;
 	}
 	
 	public Weapon() {
+	}
+
+	public boolean hasId()
+	{
+		if (id!=0) return true;
+		else return false;
 	}
 
 	public long getId() {
@@ -27,23 +35,22 @@ public class Weapon {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getMake() {
-		return make;
+	public int getDamage() {
+		return damage;
 	}
-	public void setMake(String make) {
-		this.make = make;
+	public void setDamage(int yop) {
+		this.damage = yop;
 	}
-	public String getModel() {
-		return model;
-	}
-	public void setModel(String model) {
-		this.model = model;
-	}
-	public int getYop() {
-		return yop;
-	}
-	public void setYop(int yop) {
-		this.yop = yop;
-	}
+	public String getName() {return name;}
+
+	public void setName(String name) {this.name = name;}
+
+	public String getDescription() {return description;}
+
+	public void setDescription(String description) {this.description = description;}
+
+	public Player getOwner() {return owner;}
+
+	public void setOwner(Player owner) {this.owner = owner;}
 	
 }

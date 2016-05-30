@@ -14,7 +14,7 @@ import org.junit.Test;
 import com.jayway.restassured.RestAssured;
 
 public class WeaponServiceTest {
-	
+	/*
 	@BeforeClass
 	public static void setUp(){
 		RestAssured.baseURI = "http://localhost";
@@ -41,5 +41,5 @@ public class WeaponServiceTest {
 		post("/car/").then().assertThat().statusCode(201).body(containsString("Weapon saved:"));
 	}
 	
-
+*/
 }

@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.example.restservicedemo.domain.Weapon;
-
+/*
 @Path("Weapon")
 public class WeaponRESTService {
 	
@@ -30,4 +30,4 @@ public class WeaponRESTService {
 		return Response.status(201).entity(result).build(); 
 	}
 
-}
+}*/
