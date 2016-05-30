@@ -24,6 +24,7 @@ import com.jayway.restassured.RestAssured;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class PlayerManagerTest {
 
@@ -37,33 +38,33 @@ public class PlayerManagerTest {
 	private static PlayerManager pm = new PlayerManager();
 
 	@BeforeClass
-    public static void setUp(){
+	public static void setUp() {
 		//Must be three different players and weapons for test purpose.
-		p1 = new Player( "Tomek", 5, "Mage", 1);
-		p2 = new Player( "ZabujcaPL", 70, "Rogue", 2);
-		p3 = new Player( "PolskiPolak", 20, "Warrior", 1);
-		w1 = new Weapon( "Sword", "Simple iron Sword", 20);
-		w2 = new Weapon( "Bow", "Deadly ranged weapon", 11);
-		w3 = new Weapon( "Staff of Magi", "Magical staff from far east", 32);
+		p1 = new Player("Tomek", 5, "Mage", 1);
+		p2 = new Player("ZabujcaPL", 70, "Rogue", 2);
+		p3 = new Player("PolskiPolak", 20, "Warrior", 1);
+		w1 = new Weapon("Sword", "Simple iron Sword", 20);
+		w2 = new Weapon("Bow", "Deadly ranged weapon", 11);
+		w3 = new Weapon("Staff of Magi", "Magical staff from far east", 32);
 
 
-    }
+	}
 
 	@Before
-	public void cleanTables(){
-		//It's important to always clear Weapons first, cause of foreign key violation
+	public void cleanTables() {
+		//It's important to always clear Weapons first, because of foreign key violation
 		pm.clearWeapons();
 		pm.clearPlayers();
 	}
 
 
 	@Test
-	public void addPlayer(){
+	public void addPlayer() {
 		assertEquals("Count didn't change", 1, pm.addPlayer(p1));
 	}
 
 	@Test
-	public void getAllPlayers(){
+	public void getAllPlayers() {
 
 		pm.addPlayer(p1);
 		pm.addPlayer(p2);
@@ -81,8 +82,9 @@ public class PlayerManagerTest {
 		assertEquals(p2.getNickname(), players.get(1).getNickname());
 		assertEquals(p3.getNickname(), players.get(2).getNickname());
 	}
+
 	@Test
-	public void getPlayerByNickname(){
+	public void getPlayerByNickname() {
 		pm.addPlayer(p1);
 		Player answer = pm.getPlayerByNickname(p1.getNickname());
 		assertEquals("Object didn't get id from database", true, answer.hasId());
@@ -92,7 +94,7 @@ public class PlayerManagerTest {
 	}
 
 	@Test
-	public void getPlayerById(){
+	public void getPlayerById() {
 		pm.addPlayer(p1);
 		Player answer2 = pm.getPlayerByNickname(p1.getNickname());
 		assertEquals("Object didn't get id from database", true, answer2.hasId());
@@ -105,7 +107,7 @@ public class PlayerManagerTest {
 	}
 
 	@Test
-	public void deletePlayer(){
+	public void deletePlayer() {
 		pm.addPlayer(p1);
 		Player answer = pm.getPlayerByNickname(p1.getNickname());
 		assertEquals("Object didn't get id from database", true, answer.hasId());
@@ -116,7 +118,7 @@ public class PlayerManagerTest {
 
 		pm.deletePlayer(answer.getId());
 		players = pm.getAllPlayers();
-		assertEquals("DB is not empty!",0, players.size());
+		assertEquals("DB is not empty!", 0, players.size());
 
 		pm.addPlayer(p1);
 		pm.addPlayer(p2);
@@ -127,15 +129,16 @@ public class PlayerManagerTest {
 		answer = pm.getPlayerByNickname(p1.getNickname());
 		pm.deletePlayer(answer.getId());
 		players = pm.getAllPlayers();
-		assertEquals("Number of objects in DB is wrong",2, players.size());
+		assertEquals("Number of objects in DB is wrong", 2, players.size());
 	}
+
 	@Test
-	public void addWeapon(){
+	public void addWeapon() {
 		assertEquals("Count didn't change", 1, pm.addWeapon(w1));
 	}
 
 	@Test
-	public void getAllWeapons(){
+	public void getAllWeapons() {
 
 		pm.addWeapon(w1);
 		pm.addWeapon(w2);
@@ -154,15 +157,11 @@ public class PlayerManagerTest {
 		assertEquals(w3.getName(), weapons.get(2).getName());
 	}
 
-	@Test
-	public void getWeaponWithOwner() {
-		//add
-	}
 
 	@Test
-	public void sellWeapon(){
+	public void sellWeaponAndGetWeaponWithOwner() {
 
-		assertEquals("Should return -1, because of no ID",-1, pm.sellWeapon(w1, p1));
+		assertEquals("Should return -1, because of no ID", -1, pm.sellWeapon(w1, p1));
 
 
 		pm.addPlayer(p1);
@@ -181,15 +180,42 @@ public class PlayerManagerTest {
 		assertEquals("Object didn't get id from database", true, weapons.get(1).hasId());
 
 
-		assertEquals(1, pm.sellWeapon( weapons.get(0), players.get(0)));
+		assertEquals(1, pm.sellWeapon(weapons.get(0), players.get(0)));
 
 		Weapon answer = pm.getWeaponWithOwner(weapons.get(0));
 
-		assertEquals(players.get(0).getNickname(), answer.getOwner().getNickname());
-		assertEquals(players.get(0).getId(), answer.getOwner().getId());
+		assertEquals(players.get(0), answer.getOwner());
 
-		//pm.getWeaponWithOwner(w1.getId());
 	}
 
+	@Test
+	public void getPlayersWithWeapons() {
+
+		pm.addPlayer(p1);
+		pm.addPlayer(p2);
+		pm.addPlayer(p3);
+		pm.addWeapon(w1);
+		pm.addWeapon(w2);
+		pm.addWeapon(w3);
+
+		List<Player> players = pm.getAllPlayers();
+
+		List<Weapon> weapons = pm.getAllWeapons();
+
+
+		assertEquals(1, pm.sellWeapon(weapons.get(0), players.get(0)));
+		assertEquals(1, pm.sellWeapon(weapons.get(1), players.get(0)));
+		assertEquals(1, pm.sellWeapon(weapons.get(2), players.get(2)));
+
+
+		Map<Player, List<Weapon>> answer = pm.getPlayersWithWeapons();
+
+		assertEquals(2, answer.size());
+		assertEquals(players.get(0), answer.get(players.get(0)).get(0).getOwner());
+		assertEquals(players.get(0), answer.get(players.get(0)).get(1).getOwner());
+		assertEquals(players.get(2), answer.get(players.get(2)).get(0).getOwner());
+
+	}
 
 }
+

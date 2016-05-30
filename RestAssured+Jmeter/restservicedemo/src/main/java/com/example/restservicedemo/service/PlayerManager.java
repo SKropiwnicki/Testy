@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.example.restservicedemo.domain.Player;
 import com.example.restservicedemo.domain.Weapon;
@@ -90,6 +92,9 @@ public class PlayerManager {
 					.prepareStatement("SELECT p_id, nickname, level, profession, w_id, name, description, damage, owner_id FROM Player JOIN Weapon ON w_id = ? WHERE p_id=owner_id");
 			deleteAllWeaponsStmt = connection
 					.prepareStatement("DELETE  FROM Weapon");
+			getAllPlayersWithWeaponsStmt = connection
+					.prepareStatement("SELECT p_id, nickname, level, profession, w_id, name, description, damage, owner_id FROM Player JOIN Weapon ON owner_id = p_id");
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -107,7 +112,6 @@ public class PlayerManager {
 		}
 	}
 
-	//TODO: test
 	public void clearWeapons() {
 		try {
 			deleteAllWeaponsStmt.executeUpdate();
@@ -220,7 +224,7 @@ public class PlayerManager {
 		return count;
 	}
 
-	//TODO: test
+
 // both weapon and player need to have auto-generated id from DB
 	public int sellWeapon(Weapon weapon, Player player) {
 		if(!player.hasId() && !weapon.hasId())
@@ -260,7 +264,7 @@ public class PlayerManager {
 		}
 		return weapons;
 	}
-	//TODO: test
+
 	//with owner as well
 	public Weapon getWeaponWithOwner(Weapon weapon) {
 
@@ -291,6 +295,50 @@ public class PlayerManager {
 			e.printStackTrace();
 		}
 		return w;
+	}
+
+	public Map<Player, List<Weapon>> getPlayersWithWeapons() {
+
+		List<Weapon> weapons = new ArrayList<Weapon>();
+
+		Map<Player, List<Weapon>> result = new HashMap<>();
+
+		try {
+			ResultSet rs = getAllPlayersWithWeaponsStmt.executeQuery();
+
+			while (rs.next()) {
+
+				Player p = new Player();
+
+				p.setId(rs.getInt("p_id"));
+				p.setNickname(rs.getString("nickname"));
+				p.setLevel(rs.getInt("level"));
+				p.setProfessionStr(rs.getString("profession"));
+
+
+				Weapon w = new Weapon();
+				w.setId(rs.getInt("w_id"));
+				w.setName(rs.getString("name"));
+				w.setDamage(rs.getInt("damage"));
+				w.setDescription(rs.getString("description"));
+
+				w.setOwner(p);
+
+				if (result.containsKey(p)) {
+					weapons = result.get(p);
+					weapons.add(w);
+				} else {
+					weapons = new ArrayList<>();
+					weapons.add(w);
+					result.put(p, weapons);
+				}
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }
