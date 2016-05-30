@@ -37,6 +37,7 @@ public class WeaponRESTServiceTest {
 
 	@Before
 	public void clearDB(){
+		delete("/player/").then().assertThat().statusCode(200);
 		delete("/weapon/").then().assertThat().statusCode(200);
 	}
 

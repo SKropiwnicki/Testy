@@ -24,6 +24,7 @@ import org.junit.Test;
 import com.jayway.restassured.RestAssured;
 
 import javax.ws.rs.core.MediaType;
+import java.util.Arrays;
 import java.util.List;
 
 public class PlayerRESTServiceTest {
@@ -47,6 +48,7 @@ public class PlayerRESTServiceTest {
 	@Before
 	public void clearDB(){
 		delete("/player/").then().assertThat().statusCode(200);
+		delete("/weapon/").then().assertThat().statusCode(200);
 	}
 
 
@@ -84,10 +86,8 @@ public class PlayerRESTServiceTest {
 				when().
 				post("/player/").then().assertThat().statusCode(201);
 
-		String result = get("/player/all/").asString();
 
-		List<Player> players = from(result).get("player");
-
+		List<Player> players = Arrays.asList(get("/player/all").as(Player[].class));
 
 		System.out.print(players.get(0));
 
