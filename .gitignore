@@ -73,3 +73,4 @@ lab06/Selenium/target/
 lab07/jBehaveSelenium/target/
 *.prefs
 RestAssured+Jmeter/restservicedemo/target/
+Main Project(RestAssured+Jmeter+DbTests)/restservicedemo/target/

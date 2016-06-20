@@ -1,0 +1,7 @@
+com\example\mockdemo\messenger\ConnectionStatus.class
+com\example\jbehavedemo\Messenger$1.class
+com\example\mockdemo\messenger\MessageServiceSimpleImpl.class
+com\example\jbehavedemo\Messenger.class
+com\example\mockdemo\messenger\SendingStatus.class
+com\example\mockdemo\messenger\MalformedRecipientException.class
+com\example\mockdemo\messenger\MessageService.class

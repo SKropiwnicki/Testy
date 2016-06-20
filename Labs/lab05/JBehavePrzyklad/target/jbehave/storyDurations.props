@@ -1,0 +1,6 @@
+#org.jbehave.core.embedder.StoryManager
+#Mon Apr 11 16:32:30 CEST 2016
+threads=1
+total=0
+threadAverage=0
+com/example/jbehavedemo/calculator_test.story=0

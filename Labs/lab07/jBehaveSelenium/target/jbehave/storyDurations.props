@@ -1,0 +1,4 @@
+#org.jbehave.core.embedder.StoryManager
+#Tue Apr 26 11:20:06 CEST 2016
+com/example/webguidemo/teleman_web_test.story=22000
+total=22000
