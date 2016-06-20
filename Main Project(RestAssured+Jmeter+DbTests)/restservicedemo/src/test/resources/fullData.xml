@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <PLAYER P_ID="0" NICKNAME="Dragon" LEVEL="6" PROFESSION="Warrior"/>
+  <PLAYER P_ID="7" NICKNAME="TestName" LEVEL="20" PROFESSION="Warrior"/>
+  <WEAPON W_ID="1" NAME="Sword" DESCRIPTION="Sword desc" DAMAGE="20"/>
+</dataset>

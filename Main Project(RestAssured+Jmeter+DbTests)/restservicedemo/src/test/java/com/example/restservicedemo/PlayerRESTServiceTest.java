@@ -41,9 +41,9 @@ public class PlayerRESTServiceTest {
 		RestAssured.port = 8080;
 		RestAssured.basePath = "/restservicedemo/api";
 
-		p1 = new Player("Tomek", 5, "Mage", 1);
-		p2 = new Player("ZabujcaPL", 70, "Rogue", 2);
-		p3 = new Player("PolskiPolak", 20, "Warrior", 1);
+		p1 = new Player("Tomek", 5, "Mage");
+		p2 = new Player("ZabujcaPL", 70, "Rogue");
+		p3 = new Player("PolskiPolak", 20, "Warrior");
 	}
 
 	@Before

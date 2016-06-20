@@ -14,7 +14,7 @@ public class Player {
 	public Player() {
 	}
 
-	public Player( String nickname, int level, String professionStr , long weaponId ) {
+	public Player( String nickname, int level, String professionStr ) {
 		this.nickname = nickname;
 		this.level = level;
 		this.professionStr = professionStr;
